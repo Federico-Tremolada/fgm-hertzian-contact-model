@@ -1,0 +1,2 @@
+P_N,k_reference,E0_reference_GPa_mm_minus_k,a_hom_mm,a_fgm_mm,contact_spreading_ratio,h_hom_mm,h_fgm_mm,p0_hom_MPa,p0_fgm_MPa,p0_hom_GPa,p0_fgm_GPa,pressure_severity_index,crack_suppression_indicator,pressure_reduction_percent
+3000,0.497,85.325,0.350345122901901,0.531790355344176,1.51790426234385,0.0257860725086446,0.0396873553882393,11669.9901323666,5904.13263755258,11.6699901323666,5.90413263755258,0.505924389873948,0.494075610126052,49.4075610126052

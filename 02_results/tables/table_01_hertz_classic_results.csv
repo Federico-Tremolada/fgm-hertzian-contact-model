@@ -1,0 +1,2 @@
+P_N,R_mm,E_sample_GPa,nu_sample,E_indenter_GPa,nu_indenter,E_star_MPa,a_model_mm,a_exp_mm,error_a_percent,h_mm,p0_MPa,p0_GPa
+3000,4.76,386,0.22,614,0.22,249058.427910887,0.350345122901901,0.3597,2.60074425857619,0.0257860725086446,11669.9901323666,11.6699901323666

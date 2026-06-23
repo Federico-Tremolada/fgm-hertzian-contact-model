@@ -1,0 +1,2 @@
+P_N,D_mm,R_mm,E0_GPa_mm_minus_k,k,nu,a_model_mm,a_exp_mm,a_theory_paper_mm,error_vs_exp_percent,error_vs_theory_percent,h_mm,p0_MPa,p0_GPa
+3000,9.52,4.76,85.325,0.497,0.22,0.531790355344176,0.3895,0.507,36.5315418085175,4.88961643869346,0.0396873553882393,5904.13263755258,5.90413263755258
