@@ -4,7 +4,7 @@ This folder contains the final presentation developed for the Micromechanics cou
 
 Title:
 
-"Elastic Grading for Contact Mitigation: A Gamma-Based Analytical Study of Functionally Graded Materials"
+"Elastic Modulus Gradation Effects on Hertzian Contact and Crack Suppression in FG Ceramics"
 
 ---
 
@@ -112,9 +112,7 @@ A complete fracture-mechanics assessment would require finite-element analysis.
 
 Approximate duration:
 
-15–20 minutes
-
-including discussion.
+20–25 minutes
 
 ---
 
