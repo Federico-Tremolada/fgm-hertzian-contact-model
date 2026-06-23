@@ -2,7 +2,7 @@
 
 ![MATLAB](https://img.shields.io/badge/MATLAB-Analytical%20Modeling-orange)
 ![Contact Mechanics](https://img.shields.io/badge/Field-Contact%20Mechanics-blue)
-![FGM](https://img.shields.io/badge/Material-Functionally%20Graded%20Materials-green)
+![FGM](https://img.shields.io/badge/Material-Functionally%20Graded%20Ceramics-green)
 ![Micromechanics](https://img.shields.io/badge/Course-Micromechanics-lightgrey)
 ![Politecnico di Milano](https://img.shields.io/badge/University-Politecnico%20di%20Milano-red)
 
@@ -16,7 +16,7 @@ When a spherical indenter presses against a ceramic surface, localized tensile s
 
 One strategy to mitigate this failure mechanism is the use of **Functionally Graded Materials (FGMs)**, where the elastic modulus varies continuously with depth. A compliant surface combined with a progressively stiffer substrate can redistribute contact stresses, enlarge the contact area, and reduce peak pressure.
 
-This project investigates how elastic grading influences contact mechanics using an analytical framework based on the **Gamma contact model** proposed by Jitcharoen et al. The objective is to quantify the effects of grading on contact radius, indentation depth, pressure distribution, contact severity, and the propensity for Hertzian cone-crack initiation.
+This project investigates how elastic grading influences contact mechanics using an analytical framework based on the **Gamma contact model** proposed by Jitcharoen et al. The objective is to quantify the effects of grading on contact radius, indentation depth, pressure distribution, contact severity, and the tendency toward Hertzian cone-crack initiation.
 
 ---
 
@@ -56,9 +56,9 @@ The central question addressed in this project is:
 
 More specifically, the study investigates:
 
-- the influence of the grading exponent k;
-- the influence of the grading coefficient E₀;
-- the influence of applied load P;
+- the influence of the grading exponent `k`;
+- the influence of the grading coefficient `E0`;
+- the influence of the applied load `P`;
 - the validity limits of the analytical model;
 - the relationship between pressure reduction and crack suppression.
 
@@ -68,14 +68,30 @@ More specifically, the study investigates:
 
 ### Classical Hertzian Contact
 
-For a homogeneous elastic half-space loaded by a rigid sphere, Hertz theory predicts:
+For a homogeneous elastic half-space loaded by a spherical indenter, Hertz theory predicts:
 
-- contact radius a;
-- indentation depth h;
-- pressure distribution p(r);
-- maximum pressure p₀.
+- contact radius `a`;
+- indentation depth `h`;
+- pressure distribution `p(r)`;
+- maximum pressure `p0`.
 
-The contact pressure follows a semi-elliptical distribution and reaches its maximum at the center of the contact.
+The homogeneous Hertzian contact radius is obtained from:
+
+$$
+a^3 = \frac{3PR}{4E^*}
+$$
+
+The indentation depth is:
+
+$$
+h = \frac{a^2}{R}
+$$
+
+The maximum contact pressure is:
+
+$$
+p_0 = \frac{3P}{2\pi a^2}
+$$
 
 Although Hertz theory provides an elegant analytical solution, it assumes homogeneous material properties and therefore cannot capture the effects of elastic grading.
 
@@ -83,24 +99,33 @@ Although Hertz theory provides an elegant analytical solution, it assumes homoge
 
 ### Functionally Graded Materials
 
-In a Functionally Graded Material, the elastic modulus varies continuously with depth according to:
+In a Functionally Graded Material, the elastic modulus varies continuously with depth.
 
-\[
-E(z)=E_0 z^k
-\]
+The real material profile considered in the reference paper is:
+
+$$
+E(z) = E_{surface} + E_0 z^k
+$$
+
+For the analytical Gamma formulation, the simplified power-law profile is used:
+
+$$
+E(z) = E_0 z^k
+$$
 
 where:
 
-- E(z) = elastic modulus at depth z;
-- E₀ = grading coefficient;
-- k = grading exponent.
+- `E(z)` = elastic modulus at depth `z`;
+- `E_surface` = surface elastic modulus;
+- `E0` = grading coefficient;
+- `k` = grading exponent.
 
 The grading exponent controls the shape of the stiffness profile:
 
-- small k → weak grading;
-- large k → strong grading.
+- small `k` → weak grading;
+- large `k` → stronger grading.
 
-The grading coefficient controls the overall stiffness level of the material.
+The grading coefficient controls the overall stiffness level of the graded medium.
 
 ---
 
@@ -108,19 +133,32 @@ The grading coefficient controls the overall stiffness level of the material.
 
 This project is based on the analytical formulation proposed by:
 
-**Jitcharoen et al.**
+**Jitcharoen et al. — Hertzian-Crack Suppression in Ceramics with Elastic-Modulus-Graded Surfaces**
 
-The model introduces the Gamma formulation for axisymmetric contact between a rigid spherical indenter and a power-law graded elastic half-space.
+The model introduces a Gamma-function-based formulation for axisymmetric contact between a spherical indenter and a power-law graded elastic half-space.
 
-Unlike classical Hertz theory, the contact radius becomes the primary unknown of the problem.
+Unlike classical Hertz theory, the contact radius is the primary unknown of the problem. Once the contact radius is obtained, all remaining quantities can be computed analytically:
 
-Once the contact radius is obtained, all remaining quantities can be computed analytically:
+- indentation depth;
+- pressure distribution;
+- maximum pressure.
 
-- indentation depth h;
-- pressure distribution p(r);
-- maximum pressure p₀.
+The Gamma-based contact model relates applied load and contact radius through a power-law expression of the form:
 
-The formulation naturally reduces to the classical Hertz solution when the grading effect vanishes.
+$$
+a^{k+3} = F(P, D, E_0, k, \nu, \Gamma)
+$$
+
+where:
+
+- `P` = applied load;
+- `D` = indenter diameter;
+- `E0` = grading coefficient;
+- `k` = grading exponent;
+- `ν` = Poisson's ratio;
+- `Γ` = Gamma function.
+
+The analytical formulation naturally reduces to the classical Hertz solution when the grading effect vanishes.
 
 ---
 
@@ -146,7 +184,7 @@ main_01_hertz_classic.m
 
 ### Step 2 — Elastic Profile Definition
 
-The power-law elastic grading profile is generated and visualized.
+The real elastic grading profile is generated and visualized.
 
 Script:
 
@@ -186,7 +224,7 @@ main_04_homogeneous_vs_graded.m
 
 ### Step 5 — Parametric Study on Grading Exponent
 
-Investigation of the influence of k on contact mechanics.
+Investigation of the influence of `k` on contact mechanics.
 
 Scripts:
 
@@ -199,11 +237,11 @@ main_06_pressure_profiles_vs_k.m
 
 ### Step 6 — Validity-Domain Assessment
 
-Verification of the analytical assumption:
+Verification of the analytical validity condition:
 
-\[
-a/D < 0.2
-\]
+$$
+\frac{a}{D} < 0.2
+$$
 
 Script:
 
@@ -215,7 +253,7 @@ main_07_validity_domain_k.m
 
 ### Step 7 — Parametric Study on Grading Coefficient
 
-Investigation of the influence of E₀.
+Investigation of the influence of `E0`.
 
 Script:
 
@@ -239,7 +277,7 @@ main_09_parametric_load.m
 
 ### Step 9 — Design-Oriented Severity Maps
 
-Generation of design maps in the (k,E₀) parameter space.
+Generation of design maps in the `(k, E0)` parameter space.
 
 Script:
 
@@ -267,21 +305,21 @@ main_11_crack_suppression_indicator.m
 
 A dimensionless severity metric is defined as:
 
-\[
-S_p=\frac{p_{0,FGM}}{p_{0,HOM}}
-\]
+$$
+S_p = \frac{p_{0,FGM}}{p_{0,HOM}}
+$$
 
 where:
 
-- Sₚ = contact severity index;
-- p₀,FGM = graded maximum pressure;
-- p₀,HOM = Hertzian maximum pressure.
+- `Sp` = contact severity index;
+- `p0,FGM` = maximum contact pressure in the graded material;
+- `p0,HOM` = maximum contact pressure in the homogeneous Hertzian reference material.
 
 Interpretation:
 
-- Sₚ = 1 → no benefit;
-- Sₚ < 1 → pressure reduction;
-- smaller Sₚ → better contact mitigation.
+- `Sp = 1` → no benefit;
+- `Sp < 1` → pressure reduction;
+- lower `Sp` → stronger contact mitigation.
 
 ---
 
@@ -289,38 +327,49 @@ Interpretation:
 
 A simplified crack-suppression indicator is defined as:
 
-\[
-I_{cc}=1-S_p
-\]
+$$
+I_{cc} = 1 - S_p
+$$
 
 Interpretation:
 
-- Icc = 0 → no improvement;
-- larger Icc → stronger pressure mitigation;
-- larger Icc → lower expected tendency for cone-crack initiation.
+- `Icc = 0` → no improvement;
+- larger `Icc` → stronger pressure mitigation;
+- larger `Icc` → lower expected tendency for cone-crack initiation.
 
-This indicator does not represent a fracture-mechanics criterion, but provides an intuitive engineering measure of the potential benefit of elastic grading.
+This indicator does **not** represent a fracture-mechanics criterion. It is a qualitative engineering measure based only on pressure reduction.
 
 ---
 
 ## Main Results
 
-### Effect of Grading Exponent k
+### Pressure Redistribution
 
-Increasing k produces:
+The graded material exhibits a larger contact radius and a lower maximum contact pressure compared with the homogeneous Hertzian solution.
+
+![Pressure comparison](02_results/figures/fig_04_pressure_comparison_normalized.png)
+
+The model predicts an approximately **50% reduction in peak contact pressure** for the reference graded configuration.
+
+---
+
+### Effect of Grading Exponent `k`
+
+Increasing `k` produces:
 
 - larger contact radius;
 - larger indentation depth;
 - lower maximum pressure;
+- lower contact severity;
 - stronger crack-suppression indicator.
 
-The strongest pressure reductions are obtained for large grading exponents.
+The grading exponent therefore acts as a design parameter controlling the intensity of stress redistribution.
 
 ---
 
-### Effect of Grading Coefficient E₀
+### Effect of Grading Coefficient `E0`
 
-Increasing E₀ produces:
+Increasing `E0` produces:
 
 - smaller contact radius;
 - lower indentation depth;
@@ -343,44 +392,41 @@ However, the graded solution remains consistently less severe than the homogeneo
 
 ---
 
-## Design Maps
+## Design-Oriented Severity Map
 
-A major outcome of the project is the generation of design-oriented maps in the (k,E₀) parameter space.
+A major outcome of the project is the generation of design maps in the `(k, E0)` parameter space.
 
-These maps provide direct guidance on how grading parameters influence:
+The severity map shows how the grading exponent and grading coefficient jointly influence the maximum contact pressure relative to the homogeneous Hertzian reference.
 
-- contact severity;
-- pressure reduction;
-- geometrical validity.
+![Severity map](02_results/figures/fig_10a_k_E0_severity_map.png)
 
-The maps can therefore be used as preliminary design tools for functionally graded ceramic systems.
+The most favorable regions correspond to:
+
+- larger `k`;
+- lower `E0`;
+- lower contact severity;
+- stronger pressure redistribution.
 
 ---
 
 ## Validity Domain
 
-The Gamma formulation relies on the assumption:
+The Gamma formulation relies on the small-contact assumption:
 
-\[
-a/D < 0.2
-\]
+$$
+\frac{a}{D} < 0.2
+$$
 
 where:
 
-- a = contact radius;
-- D = characteristic grading depth.
+- `a` = contact radius;
+- `D` = indenter diameter.
 
-The entire investigated parameter range remains below this limit.
+The investigated configurations remain below this limit.
 
-The reference configuration proposed in the original paper satisfies:
+![Validity domain](02_results/figures/fig_07_validity_domain_a_over_D_vs_k.png)
 
-\[
-a/D \approx 0.056
-\]
-
-which is well inside the validity domain.
-
-Therefore, all conclusions are obtained within the theoretical assumptions of the analytical model.
+Therefore, the main conclusions are obtained within the validity range of the analytical model.
 
 ---
 
@@ -397,21 +443,19 @@ Pressure redistribution
 ↓
 Lower contact severity
 ↓
-Lower tensile stresses
+Lower tensile stresses near the contact edge
 ↓
 Reduced cone-crack propensity
 ```
 
-Elastic grading does not eliminate contact stresses.
-
-Instead, it redistributes them over a larger area, reducing local stress concentrations that are typically responsible for Hertzian cone-crack initiation.
+Elastic grading does not eliminate contact stresses. Instead, it redistributes them over a larger contact area, reducing local stress concentrations that are typically responsible for Hertzian cone-crack initiation.
 
 ---
 
 ## Repository Structure
 
 ```text
-Micromechanics-Hertzian-FGM
+fgm-hertzian-contact-model
 │
 ├── 00_docs/
 │   └── README.md
@@ -446,36 +490,100 @@ Micromechanics-Hertzian-FGM
 
 ---
 
+## Reproducibility
+
+The workflow is organized so that each analysis step corresponds to a numbered MATLAB script.
+
+To reproduce the full project:
+
+1. open MATLAB;
+2. add the `01_matlab/functions/` folder to the MATLAB path;
+3. run the main scripts in numerical order;
+4. inspect generated CSV files and figures in `02_results/`.
+
+All numerical outputs are stored in:
+
+```text
+02_results/data/
+02_results/tables/
+```
+
+All final figures are stored in:
+
+```text
+02_results/figures/
+```
+
+---
+
+## Presentation
+
+The final course presentation is available here:
+
+```text
+03_presentation/Micromechanics_Tremolada.pdf
+```
+
+It summarizes the theoretical background, MATLAB implementation, validation, main results, physical interpretation, limitations, and future developments.
+
+---
+
 ## Main Conclusions
 
 - Elastic grading significantly modifies Hertzian contact behavior.
-- Increasing the grading exponent enlarges the contact area and reduces peak pressure.
-- Pressure reductions greater than 50% can be achieved within the investigated parameter space.
+- A compliant surface combined with a stiffer substrate increases the contact area.
+- Increasing the grading exponent reduces peak contact pressure.
+- Pressure reductions of approximately 50% are obtained for the reference configuration.
 - Reduced contact severity is associated with a lower propensity for Hertzian cone-crack initiation.
-- The reference configuration proposed in the original paper remains safely inside the analytical validity domain.
+- The investigated configurations remain within the analytical validity domain.
 - Functionally graded ceramics represent an effective strategy for passive stress mitigation under concentrated contact loading.
+
+---
+
+## Limitations
+
+The present model does not directly simulate crack nucleation or crack propagation.
+
+The model does not include:
+
+- full subsurface stress-field reconstruction;
+- stress intensity factor evaluation;
+- energy release rate calculations;
+- explicit LEFM crack-initiation criteria;
+- residual stresses;
+- plastic deformation;
+- frictional contact.
+
+Therefore, the crack-suppression interpretation should be considered qualitative and based on pressure redistribution.
 
 ---
 
 ## Future Developments
 
-Potential extensions of the present work include:
+Potential extensions include:
 
-- Finite Element Analysis (FEA);
-- explicit stress-field evaluation;
-- fracture-mechanics-based crack initiation criteria;
+- axisymmetric Finite Element Analysis;
+- reconstruction of the full subsurface stress field;
+- evaluation of tensile stress fields near the contact edge;
+- LEFM-based crack-initiation criteria;
 - stress intensity factor calculations;
-- experimental validation;
-- optimization of grading profiles;
-- design of bioinspired ceramic systems.
+- experimental validation through spherical indentation;
+- optimization of grading profiles for contact-damage resistance.
+
+---
+
+## References
+
+J. Jitcharoen, N. P. Padture, A. E. Giannakopoulos, S. Suresh,  
+*Hertzian-Crack Suppression in Ceramics with Elastic-Modulus-Graded Surfaces*,  
+Journal of the American Ceramic Society, 81(9), 2301–2308, 1998.
 
 ---
 
 ## Author
 
-**Federico Tremolada**
-
+**Federico Tremolada**  
 M.Sc. Student in Biomechanics and Biomaterials  
-Politecnico di Milano
+Politecnico di Milano  
 
 Micromechanics Course Project
